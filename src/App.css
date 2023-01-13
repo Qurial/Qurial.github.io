@@ -1,0 +1,26 @@
+:root {
+  --main-color: #fff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #e2e2e2;
+}
+
+.app-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-flow: column wrap;
+  position: relative;
+  max-width:1500px;
+  margin: 0 auto;
+}
+
+.mainContent {
+  display: flex;
+  flex-flow: row nowrap;
+  position: relative;
+}

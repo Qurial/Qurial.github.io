@@ -1,0 +1,27 @@
+.ProfileInfo {
+  position: absolute;
+  top: 20px;
+  right: 60px;
+  width: 300px;
+  height: 500px;
+  background-color: #fff;
+  
+  border: 2px solid #ddd;
+}
+
+.ProfileInfo img {
+  border: 2px solid #ddd;
+  position: absolute;
+  object-fit: contain;
+  object-position: center top;
+  max-height: 270px;
+  max-width: 270px;
+  margin: 15px 50%;
+  transform: translate(-50%, 0);
+}
+
+.Biography {
+  font-size: 20px;
+  margin-top: 290px;
+  margin-left: 15px;
+}

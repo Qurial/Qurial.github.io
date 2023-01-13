@@ -1,0 +1,31 @@
+.nav {
+  min-width: 150px;
+  top: 30px;
+  background-color: var(--main-color);
+}
+
+.nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav li {
+  display: block;
+  transition: .2s;
+}
+
+.nav a {
+  display: block;
+  color: #000;
+  text-decoration: none;
+  padding: 15px;
+}
+.active {
+  background-color: #ddd;
+}
+
+
+.nav li:hover {
+  background-color: #ddd;
+}

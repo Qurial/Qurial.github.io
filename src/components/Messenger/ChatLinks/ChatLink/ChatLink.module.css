@@ -1,0 +1,37 @@
+.chatLink img {
+    object-fit: cover;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    border: 1px solid #aaa;
+    position: relative;
+}
+
+.chatLink span {
+    position: absolute;
+    color: #000;
+    top: 15px;
+    left: 70px;
+    font-size: 20px;
+}
+
+.chatLink {
+    background-color: #fff;
+    margin: 5px;
+    position: relative;
+}
+
+.active {
+    background-color: #ddd;
+}
+
+.chatLink a {
+    display: block;
+    transition: .2s;
+    text-decoration: none;
+}
+
+
+.chatLink a:hover {
+    background-color: #ddd;
+}

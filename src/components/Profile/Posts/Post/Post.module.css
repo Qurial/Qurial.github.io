@@ -1,0 +1,35 @@
+.Post {
+  margin-top: 20px;
+  position: relative;
+  background-color: #fff;
+  width: 70%;
+}
+
+.Post img {
+  margin: 5px;
+  max-height: 60px;
+  max-width: 60px;
+  border-radius: 50%;
+  border: 1px solid #aaa;
+}
+
+.Post .ProfileName {
+  position: absolute;
+  font-size: 24px;
+  top:-5px;
+  left: 80px;
+}
+
+.Post .PostText {
+  margin-left: 70px;
+  margin-top:-10px;
+  padding:10px;
+}
+
+.Post button {
+  font-size: 16px;
+  margin:5px;
+  background-color: inherit;
+  border:none;
+  cursor:pointer;
+}
