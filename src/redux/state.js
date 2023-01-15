@@ -1,3 +1,5 @@
+import { rerenderEntireTree } from "../render";
+
 let state = {
     ProfilePage: {
         postData: [
@@ -48,6 +50,18 @@ let state = {
     },
 
 
+}
+
+export let addPost = (text) => {
+    let newPost = {
+        image: 'https://i.pinimg.com/originals/39/e9/b3/39e9b39628e745a39f900dc14ee4d9a7.jpg',
+        name: 'Andrew',
+        text: text,
+        likes: "0",
+    }
+
+    state.ProfilePage.postData.unshift(newPost);
+    rerenderEntireTree(state)
 }
 
 export default state;

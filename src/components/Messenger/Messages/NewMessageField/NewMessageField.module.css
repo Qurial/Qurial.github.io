@@ -1,0 +1,30 @@
+.newMessageField {
+    background-color: #fff;
+    width:100%;
+    height:10%;
+    min-height:50px;
+    position:absolute;
+    bottom: 0px;
+}
+
+.newMessageField textarea {
+    position: relative;
+    margin: 5px;
+    margin-bottom: 35px;
+    resize: none;
+    width: 90%;
+    height: 90%;
+    font-size: 20px;
+    outline: none;
+    -moz-appearance: none;
+    border: 1px solid #555;
+}
+
+.newMessageField button {
+    position: absolute;
+    right:0;
+    top:0;
+    width:8%;
+    height:90%;
+    margin:5px;
+}
