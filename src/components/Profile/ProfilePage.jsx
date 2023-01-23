@@ -1,28 +1,19 @@
 import React from "react";
-import { addPost } from "../../redux/state";
-import NewPostField from "./Posts/NewPostField/NewPostField";
-import Post from "./Posts/Post/Post";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import s from './ProfilePage.module.css'
-
-let postsElem = (postData) => postData
-    .map(post => <Post
-        Image={post.image}
-        Name={post.name}
-        Text={post.text}
-        Likes={post.likes}
-    />)
+import PostsContainer from "./Posts/PostsContainer";
 
 const ProfilePage = (props) => {
     return (
         <div className={s.ProfilePage}>
             <img className='BackgroundImage' alt='background' src='https://img.freepik.com/premium-photo/beautiful-morning-panorama-forest-covered-by-low-clouds-autumn-fog-mountain-hills-misty-fall-woodland-colored-sunrise-forested-mountain-slope_270304-233.jpg?w=2000' />
 
-            <ProfileInfo />   
+            <ProfileInfo />
 
-            <NewPostField addPost={props.addPost}/>
+            <PostsContainer
+                store={props.store}
+            />
 
-            {postsElem(props.ProfilePage.postData)}
         </div>
     )
 }

@@ -4,7 +4,7 @@ import s from './ProfileInfo.module.css'
 const ProfileInfo = () => {
     return (
         <div className={s.ProfileInfo}>
-            <img src='https://i.pinimg.com/originals/39/e9/b3/39e9b39628e745a39f900dc14ee4d9a7.jpg' />
+            <img src='https://i.pinimg.com/originals/39/e9/b3/39e9b39628e745a39f900dc14ee4d9a7.jpg' alt='background' />
             <div className={s.Biography}>
                 <p>Name: Andrew</p>
                 <p>Surname: Mikhalkov</p>

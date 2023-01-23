@@ -5,7 +5,7 @@ let ChatLinks = (props) => {
     return (
         <div>
             {props.dialogs
-                .map(d => <ChatLink name={d.name} id={d.id} avatar={d.avatar} />)}
+                .map(d => <ChatLink name={d.name} id={d.id} avatar={d.avatar} key={d.id}/>)}
         </div>
     )
 }

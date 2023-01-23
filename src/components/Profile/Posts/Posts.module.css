@@ -1,4 +1,4 @@
-.NewPostField {
+.Posts {
     margin-top: 20px;
     position: relative;
     background-color: #fff;
@@ -6,7 +6,7 @@
     height: auto;
 }
 
-.NewPostField textarea {
+.Posts textarea {
     position: relative;
     margin: 15px 50%;
     margin-bottom: 35px;

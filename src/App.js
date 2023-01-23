@@ -1,18 +1,18 @@
+import React from 'react';
 import './App.css';
 import Profile from './components/Profile/ProfilePage';
 import Header from './components/Header/Header';
 import Navigation from './components/NavigationBar/NavigationBar';
 import Footer from './components/Footer/Footer';
 import Messenger from './components/Messenger/Messenger';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Music from './components/Music/Music';
-import Friends from './components/Friends/Friends';
+import FriendsContainer from './components/Friends/FriendsContainer';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 
 const App = (props) => {
   return (
-    <BrowserRouter>
       <div className="app-wrapper">
         <Header />
         <div className='mainContent'>
@@ -20,15 +20,19 @@ const App = (props) => {
           <Routes>
             <Route path='/Profile'
               element={<Profile
-                ProfilePage={props.state.ProfilePage}
-                addPost={props.addPost}/>} />
+                store={props.store}
+                dispatch={props.dispatch}
+                profilePage={props.store.getState().ProfilePage} />} />
 
             <Route path='/Messenger/*'
               element={<Messenger
-                MessengerPage={props.state.MessengerPage} />} />
+                store={props.store}
+                dispatch={props.dispatch}
+                messengerPage={props.store.getState().MessengerPage} />} />
 
             <Route path='/Friends'
-              element={<Friends />} />
+              element={<FriendsContainer
+              store={props.store}/>} />
 
             <Route path='/News'
               element={<News />} />
@@ -42,7 +46,6 @@ const App = (props) => {
         </div>
         <Footer />
       </div>
-    </BrowserRouter>
   );
 }
 

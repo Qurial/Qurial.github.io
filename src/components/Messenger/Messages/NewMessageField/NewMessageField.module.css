@@ -28,3 +28,15 @@
     height:90%;
     margin:5px;
 }
+
+.column {
+    flex-flow: column;
+    height: 85vh;
+    border: 1px solid #ffffff;
+    position: relative;
+}
+
+.dialog {
+    width: 80%;
+    background: #ccc;
+}
