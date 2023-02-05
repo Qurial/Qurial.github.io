@@ -58,7 +58,6 @@ export const getAuthUserData = () => (dispatch) => {
 export const postLoginData = (data) => (dispatch) => {
     authAPI.login(data.email, data.password).then(data => {
         if (data.resultCode === 0) {
-            alert('hello');
             dispatch(LogInService({ email: data.email, password: data.password }))
         }
     }).catch(() => {
