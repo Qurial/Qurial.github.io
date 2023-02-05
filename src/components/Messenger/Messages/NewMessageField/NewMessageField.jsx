@@ -15,7 +15,7 @@ const NewMessageField = (props) => {
     }
     return (
         <div className={`${s.column} ${s.dialog}`}>
-            <Messages messages={props.store.getState().MessengerPage.messages}/>
+            <Messages messages={props.messages}/>
             <div className={s.newMessageField}>
                 <textarea
                     ref={newMessage}

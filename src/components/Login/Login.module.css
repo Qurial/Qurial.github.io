@@ -1,0 +1,30 @@
+form {
+    margin: 10px;
+}
+
+form * {
+    margin: 5px 0 5px 0;
+}
+
+form input {
+    font-size: 24px;
+    display: block;
+}
+
+form input[type='submit'] {
+    float: right;
+}
+
+form label {
+    font-size: 20px;
+}
+
+form p {
+    max-width: fit-content;
+    word-wrap: break-word;
+    color: red;
+}
+
+.invalidInput {
+    border: 2px solid red;
+}

@@ -8,3 +8,21 @@
   margin: 10px;
   font-size: 28px;
 }
+
+.loginBlock {
+  float: right;
+  height:100%;
+  transition: .2s;
+}
+
+.loginBlock:hover {
+  background-color: #ddd;
+}
+
+.loginBlock a {
+  color:#000;
+  font-size: 20px;
+  text-decoration: none;
+  display: block;
+  padding:10px 20px;
+}

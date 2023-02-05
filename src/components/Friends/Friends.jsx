@@ -1,60 +1,81 @@
 import React from "react";
-import s from './Friends.module.css'
+import s from './Friends.module.css';
+import userPhoto from '../../assets/images/user.png'
+import { NavLink } from "react-router-dom";
 
 const Friends = (props) => {
-    debugger;
-    if (props.friends.length === 0) {
-        props.setUsers([
-            {
-                id: '1',
-                followed: true,
-                avatar: 'https://t4.ftcdn.net/jpg/01/29/43/85/360_F_129438556_1ugKA7Fk1EiR7uar9ZGaQ3wYfaWSM25E.jpg',
-                name: 'Maria',
-                status: "Hello everyone!",
-                location: {
-                    country: 'Belarus',
-                    city: 'Minsk',
-                },
-            },
-            {
-                id: '2',
-                followed: false,
-                avatar: 'https://img.freepik.com/free-photo/portrait-smiling-attractive-redhead-young-woman-with-long-wavy-hair_295783-487.jpg?w=2000',
-                name: 'Angela',
-                status: "Knock Knock",
-                location: {
-                    country: 'Belarus',
-                    city: 'Borisov',
-                },
-            },
-            {
-                id: '3',
-                followed: true,
-                avatar: 'https://t3.ftcdn.net/jpg/02/22/85/16/360_F_222851624_jfoMGbJxwRi5AWGdPgXKSABMnzCQo9RN.jpg',
-                name: 'John',
-                status: "Who want to play Counter Strike?",
-                location: {
-                    country: 'Belarus',
-                    city: 'Paris',
-                },
-            }
-        ])
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+
+    let pages = [];
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i);
     }
-    console.log('jopa');
     return (
         <div className={s.Friends}>
+
+            {props.isFetching
+                ? <div className={s.lds_ring}><div></div><div></div><div></div><div></div></div>
+                : null}
+            {pages
+                .map(p => {
+                    if ((Math.abs(p - props.currentPage) < 5)) {
+                        return <div
+                            key={p}
+                            className={`${(props.currentPage === p) && s.selected} ${s.pageSelector}`}
+                            onClick={(e) => props.onPageChange(p)}>{p}</div>
+                    } else if ((Math.abs(p - props.currentPage) === 5)) {
+                        return <div
+                            key={p}
+                            className={s.dots}>{'...'}</div>
+                    } else if (p === pagesCount || p === 1) {
+                        return <div
+                            key={p}
+                            className={s.pageSelector}
+                            onClick={(e) => props.onPageChange(p)}>{p}</div>
+                    } return null;
+                }
+                )}
+
             {props.friends.map(u => <div key={u.id}>
-                <img src={u.avatar} className={s.userAvatar} />
+                <NavLink to={`/Profile/${u.id}`}>
+                    <img src={u.photos.small != null
+                        ? u.photos.small
+                        : userPhoto} className={s.userAvatar}
+                        alt='user' />
+                </NavLink>
                 <span>{u.name}</span>
-                <span>{u.status}</span>
-                <span>{u.location.city}</span>
-                <span>{u.location.country}</span>
+                <p>{u.status}</p>
                 {u.followed
-                    ? <button onClick={() => { props.unfollow(u.id) }}>unfollow</button>
-                    : <button onClick={() => { props.follow(u.id) }}>follow</button>}
+                    ? <button
+                        disabled={props.isFollowingInProgress.some(id => id === u.id)}
+                        onClick={() => {
+                            props.unfollow(u.id)
+                            // props.setIsFollowingInProgress(u.id);
+                            // unfollow(u.id)
+                            //     .then(data => {
+                            //         if (data.resultCode === 0) {
+                            //             props.follow(u.id);
+                            //             props.setIsFollowingInProgress(u.id);
+                            //         }
+                            //     })
+
+                        }}>unfollow</button>
+                    : <button
+                        disabled={props.isFollowingInProgress.some(id => id === u.id)}
+                        onClick={() => {
+                            
+                            props.follow(u.id)
+                            // props.setIsFollowingInProgress(u.id);
+                            // follow(u.id)
+                            //     .then(data => {
+                            //         if (data.resultCode === 0) {
+                            //             props.unfollow(u.id);
+                            //             props.setIsFollowingInProgress(u.id);
+                            //         }
+                            //     })
+                        }}>follow</button>}
             </div>)}
         </div>
     )
 }
-
 export default Friends;

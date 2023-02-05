@@ -8,11 +8,9 @@ const ProfilePage = (props) => {
         <div className={s.ProfilePage}>
             <img className='BackgroundImage' alt='background' src='https://img.freepik.com/premium-photo/beautiful-morning-panorama-forest-covered-by-low-clouds-autumn-fog-mountain-hills-misty-fall-woodland-colored-sunrise-forested-mountain-slope_270304-233.jpg?w=2000' />
 
-            <ProfileInfo />
+            <ProfileInfo profile={props.profile} />
 
-            <PostsContainer
-                store={props.store}
-            />
+            <PostsContainer />
 
         </div>
     )

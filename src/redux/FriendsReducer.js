@@ -1,43 +1,20 @@
+import { usersAPI } from "../api/api";
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
+const SET_IS_FETCHING = 'SET_IS_FETCHING';
+const SET_IS_FOLLOWING_IN_PROGRESS = 'SET_IS_FOLLOWING_IN_PROGRESS';
 
 let initialState = {
-    friends: [
-        // {
-        //     id: '1',
-        //     followed: true,
-        //     avatar: 'https://t4.ftcdn.net/jpg/01/29/43/85/360_F_129438556_1ugKA7Fk1EiR7uar9ZGaQ3wYfaWSM25E.jpg',
-        //     name: 'Maria',
-        //     status: "Hello everyone!",
-        //     location: {
-        //         country: 'Belarus',
-        //         city: 'Minsk',
-        //     },
-        // },
-        // {
-        //     id: '2',
-        //     followed: false,
-        //     avatar: 'https://img.freepik.com/free-photo/portrait-smiling-attractive-redhead-young-woman-with-long-wavy-hair_295783-487.jpg?w=2000',
-        //     name: 'Angela',
-        //     status: "Knock Knock",
-        //     location: {
-        //         country: 'Belarus',
-        //         city: 'Borisov',
-        //     },
-        // },
-        // {
-        //     id: '3',
-        //     followed: true,
-        //     avatar: 'https://t3.ftcdn.net/jpg/02/22/85/16/360_F_222851624_jfoMGbJxwRi5AWGdPgXKSABMnzCQo9RN.jpg',
-        //     name: 'John',
-        //     status: "Who want to play Counter Strike?",
-        //     location: {
-        //         country: 'Belarus',
-        //         city: 'Paris',
-        //     },
-        // }
-    ],
+    friends: [],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1,
+    isFetching: false,
+    isFollowingInProgress: [],
 };
 
 const FriendsReducer = (state = initialState, action) => {
@@ -46,10 +23,11 @@ const FriendsReducer = (state = initialState, action) => {
         return {
             ...state,
             friends: state.friends.map(u => {
-                if (userID == u.id) {
+
+                if (userID === u.id) {
                     return {
                         ...u,
-                        followed: true,
+                        followed: false,
                     }
                 }
                 return u;
@@ -60,10 +38,10 @@ const FriendsReducer = (state = initialState, action) => {
         return {
             ...state,
             friends: state.friends.map(u => {
-                if (userID == u.id) {
+                if (userID === u.id) {
                     return {
                         ...u,
-                        followed: false,
+                        followed: true,
                     }
                 }
                 return u;
@@ -71,8 +49,27 @@ const FriendsReducer = (state = initialState, action) => {
         }
     }
     let setUsers = (users) => {
-        debugger;
         return { ...state, friends: [...users], }
+    }
+
+    let setCurrentPage = (currentPage) => {
+        return { ...state, currentPage: currentPage }
+    }
+
+    let setTotalUsersCount = (usersCount) => {
+        return { ...state, totalUsersCount: usersCount }
+    }
+    let setIsFetching = (isFetching) => {
+        return { ...state, isFetching: isFetching }
+    }
+    let setIsFollowingInProgress = (userID) => {
+        return {
+            ...state,
+            isFollowingInProgress:
+                state.isFollowingInProgress.some(id => id === userID)
+                    ? state.isFollowingInProgress.filter(id => id !== userID)
+                    : [...state.isFollowingInProgress, userID]
+        }
     }
 
     switch (action.type) {
@@ -82,17 +79,76 @@ const FriendsReducer = (state = initialState, action) => {
             return unfollow(action.userID);
         case SET_USERS:
             return setUsers(action.users);
+        case SET_CURRENT_PAGE:
+            return setCurrentPage(action.currentPage);
+        case SET_TOTAL_USERS_COUNT:
+            return setTotalUsersCount(action.usersCount);
+        case SET_IS_FETCHING:
+            return setIsFetching(action.isFetching);
+        case SET_IS_FOLLOWING_IN_PROGRESS:
+            return setIsFollowingInProgress(action.userID);
         default:
             return state;
     }
 }
 
-export const followActionCreator = (userID) =>
+export const followAC = (userID) =>
     ({ type: FOLLOW, userID });
-export const unfollowActionCreator = (userID) =>
+export const unfollowAC = (userID) =>
     ({ type: UNFOLLOW, userID });
-export const setUsersActionCreator = (users) =>
+export const setUsers = (users) =>
     ({ type: SET_USERS, users });
+export const setCurrentPage = (currentPage) =>
+    ({ type: SET_CURRENT_PAGE, currentPage });
+export const setTotalUsersCount = (usersCount) =>
+    ({ type: SET_TOTAL_USERS_COUNT, usersCount });
+export const setIsFetching = (isFetching) =>
+    ({ type: SET_IS_FETCHING, isFetching });
+export const setIsFollowingInProgress = (userID) =>
+    ({ type: SET_IS_FOLLOWING_IN_PROGRESS, userID });
+
+
+export const getUsers = (pageSize, pageNumber) => {
+    return (dispatch) => {
+        dispatch(setCurrentPage(pageNumber));
+        dispatch(setIsFetching(true));
+        usersAPI.getUsers(pageSize, pageNumber)
+            .then(data => {
+                dispatch(setIsFetching(false));
+                dispatch(setTotalUsersCount(data.totalCount));
+                dispatch(setUsers(data.items));
+            })
+    }
+}
+
+export const unfollow = (userID) => {
+    return (dispatch) => {
+        dispatch(setIsFollowingInProgress(userID));
+        usersAPI.unfollow(userID)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(followAC(userID));
+                    dispatch(setIsFollowingInProgress(userID));
+                }
+            })
+    }
+}
+
+export const follow = (userID) => {
+    return (dispatch) => {
+        dispatch(setIsFollowingInProgress(userID));
+        usersAPI.follow(userID)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(unfollowAC(userID));
+                    dispatch(setIsFollowingInProgress(userID));
+                }
+            })
+    }
+}
+
+
+
 
 
 export default FriendsReducer;

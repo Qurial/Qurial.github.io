@@ -2,9 +2,8 @@ import React from "react";
 import Post from "./Post/Post";
 import s from './Posts.module.css'
 
-const NewPostField = (props) => {
+const Posts = (props) => {
     let newPostElement = React.createRef();
-
     let postsElem = (postData) => postData
         .map(post => <Post
             Image={post.image}
@@ -29,9 +28,9 @@ const NewPostField = (props) => {
                 <button onClick={onAddPost}>Post</button>
             </div>
 
-            {postsElem(props.store.getState().ProfilePage.postData)}
+            {postsElem(props.posts)}
         </div>
     )
 }
 
-export default NewPostField;
+export default Posts;

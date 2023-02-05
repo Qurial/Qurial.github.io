@@ -8,12 +8,12 @@ import { FaUser } from 'react-icons/fa'
 import { FaNewspaper } from 'react-icons/fa'
 import { NavLink } from "react-router-dom";
 
-const NavigationBar = () => {
+const NavigationBar = (props) => {
     return (
         <nav className={s.nav}>
             <ul>
                 <li>
-                    <NavLink to='/Profile' className={navData => navData.isActive ? s.active : s.a}>
+                    <NavLink to={`/Profile/${props.userID}`} className={navData => navData.isActive ? s.active : s.a}>
                         <FaUser /> Profile
                     </NavLink>
                 </li>

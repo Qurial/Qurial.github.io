@@ -7,3 +7,62 @@
     border: 1px solid #aaa;
     position: relative;
 }
+
+.selected {
+    font-weight: 700;
+    border-bottom: 5px solid #888;
+}
+
+.dots {
+    display: inline-block;
+    padding:0px 12px;
+}
+.pageSelector {
+    padding:10px 12px;
+    display: inline-block;
+    transition: .2s;
+    cursor: pointer;
+}
+.pageSelector:hover {
+    background-color: #aaa;
+}
+
+.lds_ring {
+    display: inline-block;
+    position: absolute;
+    top:50%;
+    left:30%;
+    transform: translate(-50%,-50%);
+    z-index: 1;
+    width: 80px;
+    height: 80px;
+  }
+  .lds_ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 128px;
+    height: 128px;
+    margin: 8px;
+    border: 8px solid #fff;
+    border-radius: 50%;
+    animation: lds_ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #fff transparent transparent transparent;
+  }
+  .lds_ring div:nth-child(1) {
+    animation-delay: -0.45s;
+  }
+  .lds_ring div:nth-child(2) {
+    animation-delay: -0.3s;
+  }
+  .lds_ring div:nth-child(3) {
+    animation-delay: -0.15s;
+  }
+  @keyframes lds_ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }

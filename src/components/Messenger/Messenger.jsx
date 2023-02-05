@@ -7,11 +7,9 @@ const Messenger = (props) => {
     return (
         <div className={s.messenger}>
             <div className={`${s.column} ${s.dialogsList}`}>
-
-                <ChatLinks dialogs={props.messengerPage.dialogs} />
-
+                <ChatLinks dialogs={props.dialogs} />
             </div>
-            <NewMessageFieldContainer store={props.store} className={`${s.column} ${s.dialog}`} />
+            <NewMessageFieldContainer className={`${s.column} ${s.dialog}`} />
         </div>
     )
 }
