@@ -1,0 +1,18 @@
+.linkField {
+    display: block;
+    line-height: normal;
+}
+
+.invalidInput {
+    border-color: red;
+}
+
+.errorMessage {
+    line-height: 5px;
+    color:red;
+}
+
+.lookingForAJob{
+    margin:20px 0;
+    display: block;
+}

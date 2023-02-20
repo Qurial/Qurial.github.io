@@ -1,33 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import s from './ProfileInfo.module.css'
 import userPhoto from '../../../assets/images/user.png'
-import ProfileStatusContainer from "./ProfileStatus/ProfileStatusContainer";
+import ProfileStatusHooks from "./ProfileStatus/ProfileStatusHooks";
+import EditProfileForm from "./EditProfileForm";
 
 const ProfileInfo = (props) => {
-    if(props.profile == null) {
+
+    let [editMode, setEditMode] = useState(false)
+
+    if (props.profile == null) {
         return null;
     }
-    let contacts = props.profile.contacts
+
+    const asArray = Object.entries(props.profile.contacts);
+    const filtered = asArray.filter(([key, value]) => value ? value : null);
     return (
         <div className={s.ProfileInfo}>
             <img src={props.profile.photos.large != null
                 ? props.profile.photos.large
                 : userPhoto} alt="" />
             <div className={s.Biography}>
-                <p>{props.profile.fullName}</p>
-                <p>{props.profile.aboutMe}</p>
-                <ProfileStatusContainer />
-                <ul>
-                    {contacts.facebook ? <li>{contacts.facebook}</li> : null}
-                    {contacts.website ? <li>{contacts.website}</li> : null}
-                    {contacts.vk ? <li>{contacts.vk}</li> : null}
-                    {contacts.twitter ? <li>{contacts.twitter}</li> : null}
-                    {contacts.instagram ? <li>{contacts.instagram}</li> : null}
-                    {contacts.youtube ? <li>{contacts.youtube}</li> : null}
-                    {contacts.github ? <li>{contacts.github}</li> : null}
-                    {contacts.mainLink ? <li>{contacts.mainLink}</li> : null}
-                </ul>
+                
+                <p className={s.fullName}>{props.profile.fullName}</p>
+                
+                <ProfileStatusHooks
+                    getStatus={props.getStatus}
+                    isOwner={props.isOwner}
+                    setStatus={props.setStatus}
+                    status={props.status}
+                    updateStatus={props.updateStatus}
+                />
+                {editMode
+                    ? <>
+                        <EditProfileForm {...props} setEditMode={setEditMode}/>
+                    </>
+                    : <>
+                        <p>{props.profile.aboutMe}</p>
+                        <ul>
+                            {filtered.map(([key, value]) => <li>{value}</li>)}
+                        </ul>
+                    </>}
+                    
+                {props.isOwner && <button onClick={() =>setEditMode(!editMode)}>{editMode ? 'Cancel' : 'Edit'}</button>}
             </div>
+            
         </div>
     )
 }

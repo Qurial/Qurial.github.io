@@ -1,50 +1,92 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import './App.css';
 import Footer from './components/Footer/Footer';
-import { Route, Routes } from 'react-router-dom';
-import Music from './components/Music/Music';
-import FriendsContainer from './components/Friends/FriendsContainer';
-import News from './components/News/News';
-import Settings from './components/Settings/Settings';
-import ProfilePageContainer from './components/Profile/ProfilePageContainer';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import HeaderContainer from './components/Header/HeaderContainer';
-import LoginPage from './components/Login/LoginContainer';
-import MessengerContainer from './components/Messenger/MessengerContainer';
 import NavigationBarContainer from './components/NavigationBar/NavigationBarContainer';
+import { connect, Provider } from 'react-redux';
+import { initialize } from './redux/AppReducer';
+import store from './redux/redux-store';
+import Preloader from './common/Preloader/Preloader';
+import NotFound from './components/NotFound/NotFound';
+const LoginPage = React.lazy(() => import('./components/Login/LoginContainer'))
+const MessengerContainer = React.lazy(() => import('./components/Messenger/MessengerContainer'))
+const ProfilePageContainer = React.lazy(() => import('./components/Profile/ProfilePageContainer'))
+const SettingsContainer = React.lazy(() => import('./components/Settings/SettingsContainer'))
+const FriendsContainer = React.lazy(() => import('./components/Friends/FriendsContainer'))
+const Music = React.lazy(() => import('./components/Music/Music'))
+const News = React.lazy(() => import('./components/News/News'))
 
-const App = () => {
-  return (
-    <div className="app-wrapper">
-      <HeaderContainer />
-      <div className='mainContent'>
-        <NavigationBarContainer />
-        <Routes>
+class App extends React.Component {
+  componentDidMount() {
+    this.props.initialize();
+  }
+  render() {
+    if (!this.props.initialized) {
+      return null
+    }
+    return (
+      <div className="app-wrapper">
+        <HeaderContainer />
+        <div className='mainContent'>
+          <NavigationBarContainer />
 
-          <Route path='/Profile/:userId?'
-            element={<ProfilePageContainer />} />
+          <Suspense fallback={<Preloader />}>
+            <Routes>
 
-          <Route path='/Messenger/*'
-            element={<MessengerContainer />} />
+              <Route path='/'
+                element={<Navigate to='/Profile/:userId?' />} />
 
-          <Route path='/Friends'
-            element={<FriendsContainer />} />
+              <Route path='/Profile/:userId?'
+                element={<ProfilePageContainer />} />
 
-          <Route path='/News'
-            element={<News />} />
+              <Route path='/Messenger/*'
+                element={<MessengerContainer />} />
 
-          <Route path='/Music'
-            element={<Music />} />
+              <Route path='/Friends'
+                element={<FriendsContainer />} />
 
-          <Route path='/Settings'
-            element={<Settings />} />
+              <Route path='/News'
+                element={<News />} />
 
-          <Route path='/login'
-            element={<LoginPage />} />
-        </Routes>
+              <Route path='/Music'
+                element={<Music />} />
+
+              <Route path='/Settings'
+                element={<SettingsContainer />} />
+
+              <Route path='/login'
+                element={<LoginPage />} />
+
+              <Route path='*'
+                element={<NotFound />} />
+
+            </Routes>
+          </Suspense>
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
-  );
+    );
+
+  }
 }
 
-export default App;
+let mapStateToProps = (state) => {
+  return {
+    initialized: state.App.initialized
+  }
+}
+
+let AppContainer = connect(mapStateToProps, { initialize })(App);
+
+let SocialMediaApp = (props) => {
+  return <React.StrictMode>
+    <BrowserRouter>
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
+    </BrowserRouter>
+  </React.StrictMode>
+}
+
+export default SocialMediaApp;

@@ -1,36 +1,43 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 import Post from "./Post/Post";
 import s from './Posts.module.css'
 
 const Posts = (props) => {
-    let newPostElement = React.createRef();
-    let postsElem = (postData) => postData
-        .map(post => <Post
-            Image={post.image}
-            Name={post.name}
-            Text={post.text}
-            Likes={post.likes}
-            key={post.id}
-        />)
+  let postsElem = (postData) => postData
+    .map(post => <Post
+      Image={post.image}
+      Name={post.name}
+      Text={post.text}
+      Likes={post.likes}
+      key={post.id}
+    />)
 
-    let onAddPost = () => {
-        props.addPost();
-    }
-    let onPostChange = () => {
-        let text = newPostElement.current.value;
-        props.updateNewPostText(text);
-    }
+  const { register, formState: { errors }, handleSubmit, reset } = useForm({
+    defaultValues: {
+      post: '',
+    },
+  });
+  const onSubmit = data => {
+    props.addPost(data.post);
+    reset()
 
-    return (
-        <div>
-            <div className={s.Posts}>
-                <textarea ref={newPostElement} onChange={onPostChange} value={props.newPostText} />
-                <button onClick={onAddPost}>Post</button>
-            </div>
+  }
+  return (
+    <>
+      <form className={s.Posts} onSubmit={handleSubmit(onSubmit)}>
+        <textarea {...register('post',
+          {
+            required: true
+          })}
+          aria-invalid={errors.post ? 'true' : 'false'}
+        />
+        <input type="submit" value={'Submit'}/>
+      </form>
 
-            {postsElem(props.posts)}
-        </div>
-    )
+      {postsElem(props.posts)}
+    </>
+  )
 }
 
 export default Posts;

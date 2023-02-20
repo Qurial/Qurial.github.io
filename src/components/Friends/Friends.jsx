@@ -2,6 +2,7 @@ import React from "react";
 import s from './Friends.module.css';
 import userPhoto from '../../assets/images/user.png'
 import { NavLink } from "react-router-dom";
+import Preloader from "../../common/Preloader/Preloader";
 
 const Friends = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -14,7 +15,7 @@ const Friends = (props) => {
         <div className={s.Friends}>
 
             {props.isFetching
-                ? <div className={s.lds_ring}><div></div><div></div><div></div><div></div></div>
+                ? <Preloader />
                 : null}
             {pages
                 .map(p => {
@@ -48,32 +49,10 @@ const Friends = (props) => {
                 {u.followed
                     ? <button
                         disabled={props.isFollowingInProgress.some(id => id === u.id)}
-                        onClick={() => {
-                            props.unfollow(u.id)
-                            // props.setIsFollowingInProgress(u.id);
-                            // unfollow(u.id)
-                            //     .then(data => {
-                            //         if (data.resultCode === 0) {
-                            //             props.follow(u.id);
-                            //             props.setIsFollowingInProgress(u.id);
-                            //         }
-                            //     })
-
-                        }}>unfollow</button>
+                        onClick={() => { props.unfollow(u.id) }}>unfollow</button>
                     : <button
                         disabled={props.isFollowingInProgress.some(id => id === u.id)}
-                        onClick={() => {
-                            
-                            props.follow(u.id)
-                            // props.setIsFollowingInProgress(u.id);
-                            // follow(u.id)
-                            //     .then(data => {
-                            //         if (data.resultCode === 0) {
-                            //             props.unfollow(u.id);
-                            //             props.setIsFollowingInProgress(u.id);
-                            //         }
-                            //     })
-                        }}>follow</button>}
+                        onClick={() => { props.follow(u.id) }}>follow</button>}
             </div>)}
         </div>
     )

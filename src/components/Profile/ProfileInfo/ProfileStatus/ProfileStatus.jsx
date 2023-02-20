@@ -1,7 +1,7 @@
 import React from "react";
 
 class ProfileStatus extends React.Component {
-
+    /*no longer used*/
     newStatus = React.createRef();
     isMyProfile = null;
 

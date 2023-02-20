@@ -28,3 +28,7 @@ form p {
 .invalidInput {
     border: 2px solid red;
 }
+
+.rememberMe {
+    display: inline;
+}

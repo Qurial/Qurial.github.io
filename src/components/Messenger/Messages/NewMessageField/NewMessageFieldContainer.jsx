@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { sendMessage, updateNewMessageText } from "../../../../redux/MessengerReducer";
+import { sendMessage } from "../../../../redux/MessengerReducer";
 import NewMessageField from "./NewMessageField";
 
 let mapStateToProps = (state) => {
@@ -9,4 +9,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { updateNewMessageText, sendMessage, })(NewMessageField)
+export default connect(mapStateToProps, { sendMessage })(NewMessageField)

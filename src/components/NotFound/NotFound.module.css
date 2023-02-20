@@ -1,0 +1,17 @@
+.notFound {
+    display: flex;
+    margin: 12% 45%;
+    transform: translate(-50%, 0);
+}
+
+.notFound img {
+    width: 250px;
+    height: 250px;
+}
+
+.notFound span {
+    font-weight: 600;
+    font-size: 90px;
+    width: 400px;
+    text-align: center;
+}
