@@ -5,6 +5,7 @@ import FriendsReducer from './FriendsReducer';
 import AuthReducer from './AuthReducer';
 import ThunkMiddleware from 'redux-thunk';
 import AppReducer from './AppReducer';
+import NewsReducer from './NewsReducer';
 
 
 const reducers = combineReducers({
@@ -13,6 +14,7 @@ const reducers = combineReducers({
     FriendsPage: FriendsReducer,
     Auth: AuthReducer,
     App : AppReducer,
+    NewsPage : NewsReducer,
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

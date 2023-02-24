@@ -2,3 +2,18 @@
     color: #aaa;
     font-style: italic;
 }
+
+.statusNotEditing::after, 
+.statusEditing::after {
+    position: relative;
+    content: '^Вы можете изменить статус выше дважды кликнув на него';
+    display: block;
+    margin: 20px 0;
+    color: #aaa;
+    font-style: italic;
+    font-size:18px;
+}
+
+.statusEditing::after {
+    content: 'Для того чтобы статус опубликовался нажмите на любую часть страницы';
+}

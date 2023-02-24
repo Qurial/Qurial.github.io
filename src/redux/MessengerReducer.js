@@ -19,11 +19,9 @@ let initialState = {
       avatar: 'https://img.freepik.com/free-photo/portrait-smiling-attractive-redhead-young-woman-with-long-wavy-hair_295783-487.jpg?w=2000'
     },],
   messages: [
-    { message: 'hey, how are you?', direction: "in", id: '1', },
-    { message: 'yo', direction: "in", id: '2', },
-    { message: 'are you here?', direction: "in", id: '3', },
-    { message: 'hi, I am fine, and you?', direction: "out", id: '4', },
-    { message: 'and dont spam plz', direction: "out", id: '5', },
+    { message: 'В данный момент связь чата с сервером не реализована', direction: "in", id: '1', },
+    { message: 'Поэтому он ещё не функционирует, в полной мере', direction: "in", id: '2', },
+    { message: 'Однако его UI уже работает', direction: "in", id: '3', },
   ],
   newMessageText: ''
 

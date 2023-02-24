@@ -1,0 +1,19 @@
+.userPanel {
+    background-color: #fff;
+    margin: 8px;
+    width:50%;
+    border-radius: 20px;
+    display: flex;
+    height:fit-content;
+    min-height: 110px;
+}
+
+.userAvatar {
+    margin: 10px;
+    object-fit: cover;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    border: 1px solid #aaa;
+    position: relative;
+}

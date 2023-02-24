@@ -13,11 +13,18 @@
 }
 
 .dialogsList {
-    width: 20%;
+    max-width: 20%;
+    width:20%;
     background: #fff;
 }
 
 .dialog {
-    width: 80%;
+    max-width: 80%;
     background: #ccc;
+}
+
+@media (max-width: 900px) {
+    .dialogsList {
+        width:72px;
+    }
 }

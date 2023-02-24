@@ -1,5 +1,4 @@
 import { profileAPI } from "../api/api";
-import user from '../assets/images/user.png'
 const SET_PROFILE_IMAGE = 'SET_PROFILE_IMAGE';
 
 let initialState = {

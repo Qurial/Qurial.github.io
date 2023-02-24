@@ -20,9 +20,9 @@ const ProfileInfo = (props) => {
                 ? props.profile.photos.large
                 : userPhoto} alt="" />
             <div className={s.Biography}>
-                
+
                 <p className={s.fullName}>{props.profile.fullName}</p>
-                
+
                 <ProfileStatusHooks
                     getStatus={props.getStatus}
                     isOwner={props.isOwner}
@@ -31,19 +31,20 @@ const ProfileInfo = (props) => {
                     updateStatus={props.updateStatus}
                 />
                 {editMode
-                    ? <>
-                        <EditProfileForm {...props} setEditMode={setEditMode}/>
-                    </>
+                    ? <EditProfileForm {...props} setEditMode={setEditMode} />
                     : <>
                         <p>{props.profile.aboutMe}</p>
+                        <p>{props.profile.lookingForAJob
+                            ? <pre>{props.profile.lookingForAJobDescription}</pre>
+                            : null}</p>
                         <ul>
                             {filtered.map(([key, value]) => <li>{value}</li>)}
                         </ul>
                     </>}
-                    
-                {props.isOwner && <button onClick={() =>setEditMode(!editMode)}>{editMode ? 'Cancel' : 'Edit'}</button>}
+
+                {props.isOwner && <button onClick={() => setEditMode(!editMode)}>{editMode ? 'Cancel' : 'Edit'}</button>}
             </div>
-            
+
         </div>
     )
 }

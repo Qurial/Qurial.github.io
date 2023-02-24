@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import s from './Settings.module.css'
 
 const Settings = (props) => {
-  const { register, formState: { errors }, handleSubmit, reset } = useForm({});
+  const { register, formState: { errors }, handleSubmit } = useForm({});
   const onSubmit = data => {
     let finalData = data.image[0]
     console.log(finalData)

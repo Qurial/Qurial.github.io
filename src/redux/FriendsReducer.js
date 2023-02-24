@@ -104,7 +104,7 @@ export const getUsers = (pageSize, pageNumber) => {
     return async (dispatch) => {
         dispatch(setCurrentPage(pageNumber));
         dispatch(setIsFetching(true));
-        let data = await usersAPI.getUsers(pageSize, pageNumber)
+        let data = await usersAPI.getUsers(pageSize, pageNumber);
         dispatch(setIsFetching(false));
         dispatch(setTotalUsersCount(data.totalCount));
         dispatch(setUsers(data.items));

@@ -9,7 +9,8 @@ const Header = (props) => {
             <i><FaBuysellads /></i>
             <div className={s.loginBlock}>
                 {props.isAuth
-                    ? <div>{props.login}<button onClick={props.deleteLoginData}>logout</button></div>
+                    // ? <div>{props.login}<button onClick={props.deleteLoginData}>logout</button></div>
+                    ? <div onClick={props.deleteLoginData}>{props.login}</div>
                     : <NavLink to='login'>
                         Login
                     </NavLink>}

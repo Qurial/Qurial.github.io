@@ -28,3 +28,7 @@
 .fullName {
   font-size: 32px;
 }
+
+pre {
+  line-height: 16px;
+}

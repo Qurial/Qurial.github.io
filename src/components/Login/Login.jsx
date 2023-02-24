@@ -30,7 +30,7 @@ let Login = (props) => {
           aria-invalid={errors.email ? 'true' : 'false'}
           className={errors.email && s.invalidInput}
         />
-        {errors.email && <p role='alert'>{errors.email?.message}</p>}
+        {errors.email && <p role='alert' className={s.errorMessage}>{errors.email?.message}</p>}
       </label>
       <label>
         Password:
@@ -43,26 +43,32 @@ let Login = (props) => {
           type='password'
           className={errors.password && s.invalidInput}
         />
-        {errors.password && <p role='alert'>{errors.password?.message}</p>}
+        {errors.password && <p role='alert' className={s.errorMessage}>{errors.password?.message}</p>}
       </label>
       <label>
-        <input {...register('rememberMe')} type="checkbox" className={s.rememberMe}/> Remember me
+        <input {...register('rememberMe')} type="checkbox" className={s.rememberMe} /> Remember me
       </label>
       {props.captchaUrl
-      ? <div>
-        <img src={props.captchaUrl} alt="captcha" />
-        <input {...register('captcha',
-          {
-            required: "captcha is required",
-          })}
-          onChange={() => clearErrors('loginInput')}
-          aria-invalid={errors.captcha ? 'true' : 'false'}
-          className={errors.captcha && s.invalidInput}
-        />
+        ? <div>
+          <img src={props.captchaUrl} alt="captcha" />
+          <input {...register('captcha',
+            {
+              required: "captcha is required",
+            })}
+            onChange={() => clearErrors('loginInput')}
+            aria-invalid={errors.captcha ? 'true' : 'false'}
+            className={errors.captcha && s.invalidInput}
+          />
         </div>
-      : null}
-      <input type="submit"/>
-      {errors.loginInput && <p role='alert'>{errors.loginInput?.message}</p>}
+        : null}
+      <input type="submit" />
+      {errors.loginInput && <p role='alert' className={s.errorMessage}>{errors.loginInput?.message}</p>}
+
+      <div className={s.presentationalInfo}>
+        <p>Данные тестового аккаунта:</p>
+        <p>Email: free@samuraijs.com</p>
+        <p>Password: free</p>
+      </div>
     </form>
   );
 }

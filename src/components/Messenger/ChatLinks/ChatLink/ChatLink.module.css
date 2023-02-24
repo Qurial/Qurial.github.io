@@ -7,7 +7,7 @@
     position: relative;
 }
 
-.chatLink span {
+.chatLink .name {
     position: absolute;
     color: #000;
     top: 15px;
@@ -21,7 +21,8 @@
     position: relative;
 }
 
-.active {
+.active,
+.chatLink a:hover {
     background-color: #ddd;
 }
 
@@ -31,7 +32,8 @@
     text-decoration: none;
 }
 
-
-.chatLink a:hover {
-    background-color: #ddd;
+@media (max-width: 900px) {
+    .chatLink .name {
+        display: none;
+    }
 }

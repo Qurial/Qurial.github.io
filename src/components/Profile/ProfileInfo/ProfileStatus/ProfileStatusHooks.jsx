@@ -1,3 +1,4 @@
+import cn from "classnames";
 import React, { useEffect, useState } from "react";
 import s from './ProfileStatus.module.css'
 
@@ -27,7 +28,8 @@ const ProfileStatus = (props) => {
 	}
 	return <>
 		{(editMode)
-			? <div>
+			? <div
+			className={s.statusEditing}>
 				<input
 					type="text"
 					placeholder='your status'
@@ -41,12 +43,14 @@ const ProfileStatus = (props) => {
 			: <div>
 				<span
 					onDoubleClick={activateEditMode}
-					className={status ? null : s.emptyStatus}>
+					className={cn({
+						[s.statusNotEditing]: props.isOwner,
+						[s.emptyStatus]: status ? null : s.emptyStatus,
+					})}>
 					{status || !props.isOwner ? status : 'write your status'}
 				</span>
 			</div>
 		}
 	</>
 }
-
 export default ProfileStatus;

@@ -15,7 +15,7 @@ const ProfilePageContainer = React.lazy(() => import('./components/Profile/Profi
 const SettingsContainer = React.lazy(() => import('./components/Settings/SettingsContainer'))
 const FriendsContainer = React.lazy(() => import('./components/Friends/FriendsContainer'))
 const Music = React.lazy(() => import('./components/Music/Music'))
-const News = React.lazy(() => import('./components/News/News'))
+const NewsContainer = React.lazy(() => import('./components/News/NewsContainer'))
 
 class App extends React.Component {
   componentDidMount() {
@@ -47,7 +47,7 @@ class App extends React.Component {
                 element={<FriendsContainer />} />
 
               <Route path='/News'
-                element={<News />} />
+                element={<NewsContainer />} />
 
               <Route path='/Music'
                 element={<Music />} />

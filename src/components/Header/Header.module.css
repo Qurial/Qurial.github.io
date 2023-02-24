@@ -10,6 +10,7 @@
 }
 
 .loginBlock {
+  min-width: 100px;
   float: right;
   height:100%;
   transition: .2s;
@@ -19,10 +20,21 @@
   background-color: #ddd;
 }
 
-.loginBlock a {
+.loginBlock a, 
+.loginBlock div {
   color:#000;
   font-size: 20px;
   text-decoration: none;
   display: block;
   padding:10px 20px;
+}
+
+.loginBlock div:hover {
+  color: #ddd;
+}
+
+.loginBlock div:hover::before {
+  color: #000;
+  content: 'Logout?';
+  position: absolute;
 }

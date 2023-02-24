@@ -3,24 +3,26 @@ import { useForm } from "react-hook-form";
 import s from './EditProfileForm.module.css'
 
 const EditProfileForm = (props) => {
+  let profile = props.profile;
+  let contacts = props.profile.contacts
   const { register, formState: { errors }, handleSubmit, } = useForm({
     mode: 'onBlur',
     defaultValues: {
-      aboutMe: props.profile.aboutMe,
+      aboutMe: profile.aboutMe,
       contacts: {
-        facebook: props.profile.contacts.facebook,
-        website: props.profile.contacts.website,
-        vk: props.profile.contacts.vk,
-        twitter: props.profile.contacts.twitter,
-        instagram: props.profile.contacts.instagram,
-        youtube: props.profile.contacts.youtube,
-        github: props.profile.contacts.github,
-        mainLink: props.profile.contacts.mainLink,
+        facebook: contacts.facebook,
+        website: contacts.website,
+        vk: contacts.vk,
+        twitter: contacts.twitter,
+        instagram: contacts.instagram,
+        youtube: contacts.youtube,
+        github: contacts.github,
+        mainLink: contacts.mainLink,
       },
-      lookingForAJob: props.profile.lookingForAJob,
-      lookingForAJobDescription: props.profile.lookingForAJobDescription,
-      fullName: props.profile.fullName,
-      userId: props.profile.userId,
+      lookingForAJob: profile.lookingForAJob,
+      lookingForAJobDescription: profile.lookingForAJobDescription,
+      fullName: profile.fullName,
+      userId: profile.userId,
     }
   });
 
@@ -30,19 +32,27 @@ const EditProfileForm = (props) => {
     props.setEditMode(false)
   }
 
-  // const filterObject = (obj, initialKey) => {
-  //   if (obj === undefined) return null
-  //   return Object.entries(obj).filter(([key, value]) => initialKey === key).length || null
-  // }
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.login}>
+
       <label className={s.lookingForAJob}>
-        <input {...register(`lookingForAJob`)} type='checkbox' /> Looking for a job
+        <input {...register(`lookingForAJob`)} type='checkbox' />
+        Looking for a job
       </label>
-      <label>About me
+
+      <label className={s.field}>
+        Looking for a job description:
+        <br />
+        <textarea {...register(`lookingForAJobDescription`)} type='text' />
+
+      </label>
+
+      <label className={s.field}>
+        About me:
+        <br />
         <input {...register(`aboutMe`)} />
       </label>
+
       {asArray.map(([key, value]) => {
         return <label className={s.linkField} key={key}>
           {key}:<br />
@@ -61,6 +71,7 @@ const EditProfileForm = (props) => {
             className={s.errorMessage}>field is incorrect</p>}
         </label>
       })}
+
       <input type="submit" value='Submit' />
     </form>
   );

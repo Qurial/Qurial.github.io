@@ -66,3 +66,8 @@ export const securityAPI = {
     .then(response => response.data),
 
 }
+
+export const newsAPI = {
+  getNews: () => axios.get('https://newsapi.org/v2/top-headlines?country=us&apiKey=a6a196efca8c4d2b8dae8c4b1295e496')
+    .then(response => response.data.articles),
+}

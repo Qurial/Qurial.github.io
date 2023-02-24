@@ -29,3 +29,14 @@
 .nav li:hover {
   background-color: #ddd;
 }
+
+@media (max-width: 900px) {
+  .nav li span {
+    display: none;
+    position: absolute;
+  }
+  .nav {
+    
+    min-width: 50px;
+  }
+}
