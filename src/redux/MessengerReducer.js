@@ -7,15 +7,11 @@ let initialState = {
       avatar: 'https://t4.ftcdn.net/jpg/01/29/43/85/360_F_129438556_1ugKA7Fk1EiR7uar9ZGaQ3wYfaWSM25E.jpg'
     },
     {
-      name: 'Michael', id: '2',
-      avatar: 'http://www.culturaeculture.it/wp-content/uploads/2014/05/Michael-Jackson-ai-tempi-di-Bad.jpg'
-    },
-    {
-      name: 'John', id: '3',
+      name: 'John', id: '2',
       avatar: 'https://t3.ftcdn.net/jpg/02/22/85/16/360_F_222851624_jfoMGbJxwRi5AWGdPgXKSABMnzCQo9RN.jpg'
     },
     {
-      name: 'Angela', id: '4',
+      name: 'Angela', id: '3',
       avatar: 'https://img.freepik.com/free-photo/portrait-smiling-attractive-redhead-young-woman-with-long-wavy-hair_295783-487.jpg?w=2000'
     },],
   messages: [

@@ -4,7 +4,6 @@ import s from './News.module.css'
 const News = (props) => {
   return (
     <div className={s.News}>
-      <button onClick={() => props.getNews()}> get news </button>
       {props.news ? (props.news).map(news => {
 
         let date = new Date(news.publishedAt)

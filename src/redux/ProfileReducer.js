@@ -8,13 +8,6 @@ const SET_IS_OWNER = 'SET_IS_OWNER';
 let initialState = {
 	postData: [
 		{
-			image: 'http://www.culturaeculture.it/wp-content/uploads/2014/05/Michael-Jackson-ai-tempi-di-Bad.jpg',
-			name: 'Michael',
-			text: "Hee! Hee!",
-			likes: "46321",
-			id: 1,
-		},
-		{
 			image: 'https://t4.ftcdn.net/jpg/01/29/43/85/360_F_129438556_1ugKA7Fk1EiR7uar9ZGaQ3wYfaWSM25E.jpg',
 			name: 'Maria',
 			text: "Hi! Usually nothing, it's not a real social network, and we are not even real people",
