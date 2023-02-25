@@ -5,7 +5,7 @@ import News from "./News";
 
 const NewsContainer = (props) => {
 	useEffect(() => {
-		props.getNews();
+		props.getNews('world news');
 	}, [props.news])
 
     return (
@@ -15,7 +15,7 @@ const NewsContainer = (props) => {
 
 let mapStateToProps = (state) => {
     return {
-        news: state.NewsPage.news,
+        news: state.NewsPage.webSearchNews,
     }
 }
 
