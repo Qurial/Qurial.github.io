@@ -2,7 +2,13 @@ import React from "react"
 import s from './Paginator.module.css'
 
 
-const Paginator = ({pagesCount, pages, onPageChange, currentPage}) => {
+const Paginator = ({pagesCount, onPageChange, currentPage}) => {
+
+  let pages = [];
+  for (let i = 1; i <= pagesCount; i++) {
+    pages.push(i);
+  }
+
   return (
     pages.map(p => {
       if ((Math.abs(p - currentPage) < 5)) {

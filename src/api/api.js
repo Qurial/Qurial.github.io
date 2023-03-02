@@ -11,13 +11,14 @@ const options = {
   method: 'GET',
   url: 'https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/NewsSearchAPI',
   params: {
-    q: 'taylor swift',
+    q: '',
     pageNumber: '1',
-    pageSize: '10',
+    pageSize: '50',
     autoCorrect: 'true',
     withThumbnails: 'true',
     fromPublishedDate: 'null',
-    toPublishedDate: 'null'
+    toPublishedDate: 'null',
+    safeSearch: 'true'
   },
   headers: {
     'X-RapidAPI-Key': '251b6f0c23msh46c0712d260cac0p119f1fjsn8aaab9773ea0',
@@ -86,17 +87,19 @@ export const securityAPI = {
 }
 
 export const newsAPI = {
-  getNews: () => axios.get('https://newsapi.org/v2/top-headlines?country=us&apiKey=a6a196efca8c4d2b8dae8c4b1295e496')
-    .then(response => response.data.articles),
-
-  getWebSearchNews: async (request) => {
-    options.params.q = request
-    // try {
+  getNews: async (request) => {
+    options.params.q = request.query
+    options.params.pageNumber = request.pageNumber
+    options.params.safeSearch = request.safeSearch
+    try {
+      console.log(options)
       let data = await axios.request(options)
+      data.data.pageSize = options.params.pageSize
+      console.log(data.data)
       return data.data;
-  //   }
-  //   catch (error) {
-  //     console.error(error)
-  //   }
+    }
+    catch (error) {
+      console.error(error)
+    }
   },
 }

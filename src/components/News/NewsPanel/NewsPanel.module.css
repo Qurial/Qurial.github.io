@@ -1,0 +1,45 @@
+.articlePreview {
+    position: relative;
+    background-color: #fff;
+    margin: 10px;
+    padding: 15px;
+    border-radius: 20px;
+    display: flex;
+    text-decoration: none;
+}
+
+.articlePreview img {
+    width:500px;
+    height: 500px;
+
+    border-radius: 20px;
+    object-fit: cover;
+}
+
+.articleInfo {
+    margin: 10px;
+}
+
+.articleTitle {
+    color: #000;
+    margin: 0;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.articleDescription {
+    color: #555;
+    font-size: 18px;
+}
+
+.articleSnippet {
+    color: #999;
+    font-size: 14px;
+}
+
+.publishDate {
+    position: absolute;
+    right: 20px;
+    bottom: 0;
+    color: #aaa;
+}

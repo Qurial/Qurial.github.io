@@ -1,33 +1,76 @@
-import React from "react";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import s from './News.module.css'
+import classNames from "classnames";
+import { FaCog, FaSearch } from 'react-icons/fa'
+import NewsPanel from "./NewsPanel/NewsPanel";
+import Paginator from "../../common/Paginator/Paginator";
 
 const News = (props) => {
+  let [isOptionsShown, setIsOptionsShown] = useState(false)
+  const { register, formState: { errors }, handleSubmit, clearErrors, setValue } = useForm({
+    mode: 'onSubmit',
+    defaultValues: {
+      query: '',
+      safeSearch: props.searchSafetyMode,
+      pageNumber: 1
+    }
+  });
+  const onSubmit = data => {
+    console.log(data)
+    props.printNews(data)
+  };
+
+  let pagesCount = Math.ceil(+props?.news?.totalCount / +props?.news?.pageSize)
+
+  let createPageSelectButton = (pageNumber) => {
+    props.printNews({ query: props.request.query, pageNumber })
+  }
 
   return (
-    <div className={s.News}>
+    <div className={s.news}>
+        <form onSubmit={handleSubmit(onSubmit)} className={s.searchField}>
+          <div className={s.button} onClick={e => {
+            e.preventDefault()
+            setIsOptionsShown(!isOptionsShown)
+          }}><FaCog /></div>
+          {isOptionsShown
+            ? <label className={s.options}>
+              <input {...register('safeSearch')}
+                type='checkbox'
+                onClick={e => props.setSearchSafetyMode(e.target.checked)}
+              />Safe Mode
+            </label>
+            : null}
+          <input {...register('query',
+            { required: 'Please enter your request', })}
+            onBlur={() => clearErrors('query')}
+            aria-invalid={errors.email ? 'true' : 'false'}
+            className={classNames({ [s.emptySearch]: errors.query }, s.searchBar)}
+          />
+          <button type="submit" className={s.button}><FaSearch /></button>
+        </form>
+      {props.news?.didUMean ?
+        <p className={s.errorMessage}>Maybe you mean:
+          <span
+            className={s.didUMean}
+            onClick={() => {
+              setValue('query', props.news.didUMean)
+              props.printNews({query: props.news.didUMean, pageNumber: 1})
+            }}>
+            {props.news.didUMean}
+          </span>?
+        </p> : null}
+      {errors.query && <p role='alert' className={s.errorMessage}>{errors.query?.message}</p>}
 
-      <button onClick={() => props.getNews('biden')}>get news</button>
-      {props.news ? (props.news.value).map(news => {
-
-        let date = new Date(news.datePublished)
-
-        return <a key={news.id} className={s.articlePreview} href={news.url}>
-          {news.image.url ? <img src={news.image.url} alt={news.title} /> : null}
-          <div className={s.articleInfo}>
-            <p className={s.articleTitle}>{news.title}</p>
-            <p className={s.articleDescription}>{news.description}</p>
-            <p className={s.articleSnippet}>{news.snippet}</p>
-            <p className={s.publishDate}>{
-              `${String(date
-                .getDate()).length < 2 ? '0' : ''}${date
-                  .getDate()}.${String(date
-                    .getMonth()).length < 2 ? '0' : ''}${date
-                      .getMonth() + 1}.${date
-                        .getFullYear()}`}</p>
-          </div>
-        </a>
-      }) : null}
-
+      {props.news ? (props.news.value)
+        .map(news => <NewsPanel news={news} key={news.id} />) : null}
+      <div className={s.paginator}>
+        <Paginator
+          pagesCount={pagesCount}
+          currentPage={+props.match.params.pageNumber}
+          onPageChange={createPageSelectButton} />
+      </div>
     </div>
   )
 }

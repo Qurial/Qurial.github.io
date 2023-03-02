@@ -1,35 +1,41 @@
 import { newsAPI } from "../api/api";
 
 const SET_NEWS = 'SET_NEWS';
+const SET_SEARCH_SAFETY_MODE = 'SET_SEARCH_SAFETY_MODE';
 
 let initialState = {
     news: null,
-    webSearchNews: null,
+    searchSafetyMode: false,
 }
 
 const NewsReducer = (state = initialState, action) => {
 
-    let setNews = (news, webSearchNews) => {
-        return { ...state, news, webSearchNews }
+    let setNews = (news) => {
+        return { ...state, news }
+    }
+
+    let setSearchSafetyMode = (searchSafetyMode) => {
+        return {...state, searchSafetyMode}
     }
     switch (action.type) {
         case SET_NEWS:
-            return setNews(action.news, action.webSearchNews);
+            return setNews(action.news);
+        case SET_SEARCH_SAFETY_MODE:
+            return setSearchSafetyMode(action.searchSafetyMode);
         default:
             return state;
     }
 }
 
-export const setNews = (news, webSearchNews) =>
-    ({ type: SET_NEWS, news, webSearchNews });
+export const setNews = (news) =>
+    ({ type: SET_NEWS, news });
+export const setSearchSafetyMode = (searchSafetyMode) =>
+    ({ type: SET_SEARCH_SAFETY_MODE, searchSafetyMode });
 
 export const getNews = (request) => (dispatch) => {
-    //let news = await newsAPI.getNews();
-    newsAPI.getWebSearchNews(request)
-        .then(webSearchNews => {
-            let news = null
-            console.log(webSearchNews)
-            dispatch(setNews(news, webSearchNews));
+    newsAPI.getNews(request)
+        .then(news => {
+            dispatch(setNews(news));
         })
 }
 

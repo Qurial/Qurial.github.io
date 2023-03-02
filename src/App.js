@@ -46,7 +46,7 @@ class App extends React.Component {
               <Route path='/Friends'
                 element={<FriendsContainer />} />
 
-              <Route path='/News'
+              <Route path='/News/:query?/:pageNumber?'
                 element={<NewsContainer />} />
 
               <Route path='/Music'
@@ -80,13 +80,15 @@ let mapStateToProps = (state) => {
 let AppContainer = connect(mapStateToProps, { initialize })(App);
 
 let SocialMediaApp = (props) => {
-  return <React.StrictMode>
+  return( 
+  //<React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
         <AppContainer />
       </Provider>
     </BrowserRouter>
-  </React.StrictMode>
+  //</React.StrictMode>
+  )
 }
 
 export default SocialMediaApp;

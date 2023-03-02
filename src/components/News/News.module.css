@@ -1,38 +1,89 @@
-.articlePreview {
+.news {
     position: relative;
-    background-color: #fff;
-    margin: 10px;
-    padding: 15px;
-    border-radius: 20px;
+    width:100%;
+}
+
+.searchField {
+    position: relative;
     display: flex;
-    text-decoration: none;
+    justify-content: center;
+    margin: 20px;
+    width:100%;
 }
 
-.articlePreview img {
-    width: 500px;
+/* .searchField form {
+    width: 100%;
+} */
+
+.searchBar {
+    font-size: 28px;
+    padding: 10px 15px;
     border-radius: 20px;
+    border: none;
+    box-shadow: 0 0 5px 1px #aaa;
+    width: 60%;
 }
 
-.articleInfo {
-    margin:10px;
+.emptySearch {
+    box-shadow: 0px 0px 10px 1px #33A1FD;
 }
 
-.articleTitle {
-    color: #000;
-    margin:0;
-    font-size: 24px;
-    font-weight: 500;
+.button {
+    font-size: 28px;
+    color: #111;
+    background-color: #fff;
+    width:50px;
+    height:50px;
+    border-radius: 50px;
+    border: none;
+    box-shadow: 0 0 5px 1px #aaa;
+    cursor: pointer;
+    margin: 5px;
+    transition: .2s;
+    padding:9px;
+}
+
+.button:hover {
+    background-color: #ddd;
 }
 
 
-.articleDescription {
-    color: #555;
-    font-size: 18px;
+.button:active {
+    background-color: #bbb;
 }
 
-.publishDate {
+.errorMessage {
+    display: flex;
+    justify-content: center;
+    color: #666;
+    font-style: italic;
+}
+
+.didUMean {
+    color: #33A1FD;
+    font-weight: 700;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.didUMean:hover {
+    color: #33CEFD;
+}
+
+.paginator {
+    margin-left: 15px;
+}
+
+.options {
+    font-size: 16px;
     position: absolute;
-    right:20px;
-    bottom: 0;
-    color:#aaa;
+    background-color: #fff;
+    padding:10px;
+    box-shadow: 0 0 5px 1px #aaa;
+    border-radius: 12px;
+    /* margin-left: -850px; */
+    /* margin-right: 1050px; */
+    /* margin-top: 10px; */
+    left: 180px;
+    top:65px;
 }
